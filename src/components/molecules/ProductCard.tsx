@@ -13,7 +13,7 @@ export function ProductCard({ product, index }: { product: Product; index: numbe
         </span>
       </div>
       <div className="card-icon">
-        <img src={`/images/${product.slug}-icon.${product.slug === 'zap' ? 'svg' : 'png'}`} alt="" width="128" height="128" loading="lazy" />
+        <img src={`/images/${product.slug}-icon.png`} alt="" width="128" height="128" loading="lazy" />
       </div>
       <h3>
         {product.name}

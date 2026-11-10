@@ -81,7 +81,7 @@ import { products, upcomingProducts } from '../data/products'
       <div class="upcoming-grid">
         {upcomingProducts.map((product) => (
           <a class="upcoming-product" href={`/products/${product.slug}/`}>
-            <img src={`/images/${product.slug}-icon.${product.slug === 'zap' ? 'svg' : 'png'}`} width="64" height="64" alt="" loading="lazy" />
+            <img src={`/images/${product.slug}-icon.png`} width="64" height="64" alt="" loading="lazy" />
             <div>
               <h3>{product.name}</h3>
               <p>A new tool in the making.</p>
