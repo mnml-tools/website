@@ -3,7 +3,7 @@ export const products = [
     slug: 'zap',
     name: 'Zap',
     category: 'Database explorer',
-    color: '#b8aff0',
+    color: '#e9b923',
     headline: 'Your data.\nWithin reach.',
     description:
       'Explore your databases, edit a few rows, and get on with your day. A clear workspace for PostgreSQL, MySQL, and SQLite.',

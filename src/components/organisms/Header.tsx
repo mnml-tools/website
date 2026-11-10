@@ -57,7 +57,7 @@ export function Header() {
             <span className="eyebrow">Meet your everyday tools</span>
             {products.map((p) => (
               <a key={p.slug} href={`/products/${p.slug}/`}>
-                <img src={`/images/${p.slug}-icon.png`} width="44" height="44" alt="" />
+                <img src={`/images/${p.slug}-icon.${p.slug === 'zap' ? 'svg' : 'png'}`} width="44" height="44" alt="" />
                 <span>
                   <strong>{p.name}</strong>
                   <small>{p.category}</small>
