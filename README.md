@@ -2,6 +2,8 @@
 
 The project and product website for Minimal Tools, built with Astro, React, and TypeScript. All pages are generated as static HTML.
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/4fd4ef5b-4211-4090-95eb-226790402f1f/deploy-status)](https://app.netlify.com/projects/minimaltools/deploys)
+
 ## Development
 
 Use Node.js 22.12 or newer.
