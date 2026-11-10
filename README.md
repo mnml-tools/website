@@ -2,11 +2,9 @@
 
 The project and product website for Minimal Tools, built with Astro, React, and TypeScript. All pages are generated as static HTML.
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/4fd4ef5b-4211-4090-95eb-226790402f1f/deploy-status)](https://app.netlify.com/projects/minimaltools/deploys)
-
 ## Development
 
-Use Node.js 22.12 or newer.
+Use Node.js 22.23.4 or newer in the Node 22 release line, matching the deployment image.
 
 ```sh
 npm ci
@@ -29,8 +27,10 @@ App icons and light/dark screenshots come from the product repositories. The sup
 
 ## Deploy to statichost.eu
 
-Push this directory to your website repository, connect it in the statichost.eu dashboard, and enable automatic builds. `statichost.yml` installs the locked dependencies, builds with Node 22, and publishes `dist`. No server, adapter, database, or paid backend is needed.
+Connect the website repository and production branch in the statichost.eu dashboard, and enable automatic builds. The root `statichost.yml` uses the `node:22` image, runs `npm ci && npm run build`, and publishes `dist`. No server, adapter, database, or paid backend is needed.
 
 Add `minimal.tools` in the dashboard and configure DNS using the records provided by statichost.eu. The canonical URL, sitemap, and robots file already use `https://minimal.tools`. Domain setup is managed in the dashboard, not the YAML file. See https://www.statichost.eu/docs/domains/.
+
+When moving the live site, verify the first StaticHost build at its preview address before changing DNS. After the custom domain serves correctly over HTTPS, disable the old Netlify deployment.
 
 This checkout prepares the site for deployment; it does not configure the hosting account or DNS. Release buttons link to each product's GitHub Releases rather than assuming a particular release or platform artifact exists.
