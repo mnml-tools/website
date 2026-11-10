@@ -1,0 +1,29 @@
+---
+import Layout from './Layout.astro'
+import { LinkButton } from '../atoms/LinkButton'
+interface Props {
+  name: string
+  slug: string
+}
+const { name, slug } = Astro.props
+---
+
+<Layout
+  title={`${name} — Coming soon | Minimal Tools`}
+  description={`${name} is in the works. A new addition to the Minimal Tools family.`}
+>
+  <main id="main" class="coming-soon-page">
+    <a class="text-link" href="/#products">
+      ← Back to the toolbox
+    </a>
+    <img src={`/images/${slug}-icon.png`} width="128" height="128" alt={`${name} logo`} />
+    <p class="eyebrow">{name} / In the works</p>
+    <h1>
+      A little more
+      <br />
+      <span class="serif">in the making.</span>
+    </h1>
+    <p class="hero-description">{name} is joining the toolbox. We’re still working on the details. More soon.</p>
+    <LinkButton href="https://github.com/mnml-tools">Follow what’s next</LinkButton>
+  </main>
+</Layout>

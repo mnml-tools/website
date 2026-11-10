@@ -1,0 +1,27 @@
+{
+  "name": "minimal-tools-website",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --host 127.0.0.1",
+    "build": "astro check && astro build",
+    "preview": "astro preview --host 127.0.0.1",
+    "format": "prettier --plugin prettier-plugin-astro --write .",
+    "format:check": "prettier --plugin prettier-plugin-astro --check ."
+  },
+  "dependencies": {
+    "astro": "latest",
+    "@astrojs/react": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "@astrojs/check": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "typescript": "latest",
+    "prettier": "latest",
+    "prettier-plugin-astro": "latest"
+  }
+}

@@ -1,0 +1,40 @@
+---
+import { Header } from '../organisms/Header'
+import { Footer } from '../organisms/Footer'
+import '../../styles/global.css'
+interface Props {
+  title?: string
+  description?: string
+}
+const {
+  title = 'Minimal Tools — A little less. A lot more focus.',
+  description = 'Meet Zap, Bud, and Piw. A small family of focused desktop tools for databases, Git, notes, and tasks.'
+} = Astro.props
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f5f3ed" />
+    <title>{title}</title>
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site)} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">
+      Skip to content
+    </a>
+    <div class="site-shell">
+      <Header client:load />
+      <slot />
+      <Footer />
+    </div>
+  </body>
+</html>

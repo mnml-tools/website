@@ -1,0 +1,153 @@
+---
+import Layout from '../components/templates/Layout.astro'
+import { Nut } from '../components/atoms/Nut'
+import { Icon } from '../components/atoms/Icon'
+import { LinkButton } from '../components/atoms/LinkButton'
+import { ProductCard } from '../components/molecules/ProductCard'
+import { products, upcomingProducts } from '../data/products'
+---
+
+<Layout>
+  <main id="main">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">
+          <span class="status-dot"></span> Small tools. Everyday work.
+        </p>
+        <h1>
+          Less tool.
+          <br />
+          More <span class="serif">doing.</span>
+        </h1>
+        <p class="hero-description">
+          Good tools get out of your way.
+          <br />
+          Meet a small family of apps that keep the essentials
+          <br class="desktop-break" /> and leave the complexity behind.
+        </p>
+        <div class="hero-actions">
+          <LinkButton href="#products" icon="grid">
+            Find your tool
+          </LinkButton>
+          <a class="text-link" href="#story">
+            A little about us <span>↓</span>
+          </a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="art-grid"></div>
+        <span class="art-label">THE ESSENTIALS, WELL MADE.</span>
+        <div class="nut-shadow">
+          <Nut />
+        </div>
+        <div class="hero-nut">
+          <Nut />
+        </div>
+        <span class="art-cross one">+</span>
+        <span class="art-cross two">+</span>
+        <span class="art-caption">
+          LESS, BUT CONSIDERED.
+          <br />
+          MINIMAL TOOLS / EST. WITH ZAP
+        </span>
+        <span class="art-coordinate">01 — 03</span>
+      </div>
+      <div class="hero-bottom">
+        <span>Built by developers, for the everyday.</span>
+        <span>
+          Scroll to explore <span aria-hidden="true">↓</span>
+        </span>
+      </div>
+    </section>
+    <section id="products" class="products-section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">01 / The toolbox</p>
+          <h2>
+            Just what you <span class="serif">need.</span>
+          </h2>
+        </div>
+        <p>
+          Three focused apps. A familiar feel.
+          <br />
+          Pick the one that fits your day.
+        </p>
+      </div>
+      <div class="product-grid">
+        {products.map((product, index) => (
+          <ProductCard product={product} index={index} />
+        ))}
+      </div>
+      <div class="upcoming-grid">
+        {upcomingProducts.map((product) => (
+          <a class="upcoming-product" href={`/products/${product.slug}/`}>
+            <img src={`/images/${product.slug}-icon.png`} width="64" height="64" alt="" loading="lazy" />
+            <div>
+              <h3>{product.name}</h3>
+              <p>A new tool in the making.</p>
+            </div>
+            <span class="coming-soon-badge">Coming soon</span>
+            <Icon name="chevron-right" />
+          </a>
+        ))}
+      </div>
+    </section>
+    <section class="philosophy">
+      <p class="eyebrow">02 / A shared approach</p>
+      <h2>
+        Your work is complex enough.
+        <br />
+        Your tools can be <span class="serif">simple.</span>
+      </h2>
+      <div class="principles">
+        <article>
+          <span>01</span>
+          <h3>Focused by design.</h3>
+          <p>The things you reach for every day, with room to breathe. Each app has a clear job to do.</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>Feels like family.</h3>
+          <p>
+            A familiar visual language across the toolbox. Less time learning the interface, more time in your flow.
+          </p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>Built from real needs.</h3>
+          <p>Tools we wanted to use ourselves, shaped by the small frustrations of everyday development.</p>
+        </article>
+      </div>
+    </section>
+    <section id="story" class="story">
+      <div>
+        <p class="eyebrow">03 / The people behind the tools</p>
+        <h2>
+          It started with Zap.
+          <br />
+          <span class="serif">Then came “what if?”</span>
+        </h2>
+      </div>
+      <div class="story-copy">
+        <p>
+          We wanted a simpler way to work with databases. So we made Zap. Then we looked at our Git workflow. Bud
+          followed. Notes and tasks? That became Piw.
+        </p>
+        <p>
+          Minimal Tools is a collaboration between two developers who share an idea: the tools we use every day should
+          feel a little lighter. There are three in the toolbox now, with tst and gem taking shape next.
+        </p>
+        <div class="makers">
+          <a href="https://github.com/rafmst">
+            <img src="/images/rafmst-avatar.jpg" alt="" width="36" height="36" loading="lazy" />
+            @rafmst
+          </a>
+          <a href="https://github.com/fj-onathan">
+            <img src="/images/fj-onathan-avatar.png" alt="" width="36" height="36" loading="lazy" />
+            @fj-onathan
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
