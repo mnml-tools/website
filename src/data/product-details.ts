@@ -173,85 +173,89 @@ export const productDetails: Record<'zap' | 'bud' | 'piw', ProductDetails> = {
   },
   piw: {
     summary:
-      'A local desktop workspace for notes, documents, and tasks, backed by one SQLite database. Quick Capture and sticky windows share the same records as the main workspace.',
+      'A local desktop app for notes and tasks, kept as plain Markdown files in a folder you choose. Quick Capture and sticky notes work on the same files as the main window.',
     features: [
       {
-        title: 'Quick Capture and notes',
-        description: 'Capture a note or task from another app with a global shortcut, tray action, or CLI flag.',
+        title: 'A vault of Markdown notes',
+        description: 'Notes are .md files in your vault: ~/Piw by default, or any folder you pick in Settings → Data.',
         capabilities: [
-          'The popup closes only after saving succeeds; capture drafts persist across accidental closes.',
-          'Write Markdown-friendly notes, use a split list/editor layout, add tags, and archive finished notes.',
-          'The --quick-note and --quick-task flags open capture in the already running app.'
+          'Edit the files in any other app; Piw follows external changes through a file watcher.',
+          'The top-level folders are spaces. The space filter in the title bar narrows the tree, search, and tasks to one of them.',
+          'Notes, task views, Trash, and Settings open as tabs, and the open tabs are remembered.'
         ]
       },
       {
-        title: 'Documents and linked tasks',
-        description: 'Convert a note into a tabbed document while preserving its identity.',
+        title: 'One live editor',
+        description: 'A single live Markdown editor shows headings, emphasis, code, quotes, and lists as you type.',
         capabilities: [
-          'Content tabs store rich text, code blocks, and checklists; Tasks tabs are live filtered task views.',
-          'Convert a line into a task with Ctrl/Command + T. Completion updates all views of the same task.',
-          'Tasks support one level of subtasks, due dates, manual ordering, and Today, Upcoming, All, and Completed views.'
+          'Markdown markers appear only on the line you are editing.',
+          'Link notes with [[Note]] and tag them with #tag. Renaming a note updates the links to it.',
+          'Front matter is kept byte for byte; Piw reads its tags and never adds front matter on its own.'
         ]
       },
       {
-        title: 'Spaces, search, and stickies',
-        description: 'Filter work by space and find content across notes, documents, and tasks.',
+        title: 'Tasks inside notes',
+        description: 'A task is a - [ ] line in any note. There is no separate task database to keep in sync.',
         capabilities: [
-          'Work and Personal are included; create additional spaces and triage new items from Inbox.',
-          'SQLite FTS5 indexes content with highlighted search matches.',
-          'Pin a note, task, or document task list as a sticky. Window position, size, and on-top preference are remembered where supported.'
+          'Type @today, @tomorrow, @friday, or a date to set a due date. Dates show as chips and stay plain text in the note.',
+          'A panel beside each note lists its tasks by heading, with progress, due dates, and the note’s outline.',
+          'Today (with Overdue), Upcoming, and All collect tasks across every note or one space. Ticking a task there edits its line in the note.'
         ]
       },
       {
-        title: 'Storage and concurrent edits',
-        description: 'The Rust core owns writes to piw.sqlite3 in the application-data directory.',
+        title: 'Quick Capture and stickies',
+        description:
+          'Capture from any app with a global shortcut, the tray menu, or the --quick-note and --quick-task flags.',
         capabilities: [
-          'SQLite uses WAL, synchronous=FULL, foreign keys, and transactional versioned migrations. Upgrades create a database backup first.',
-          'Debounced autosaves check an expected revision. A stale text save reports a conflict instead of overwriting a newer edit.',
-          'Change events refresh affected queries across windows; each task remains one record regardless of how many views show it.'
+          'A captured note or task is appended to the chosen space’s Inbox.md. The popup closes only after saving, and drafts survive an accidental close.',
+          'Pin a note or a task view to your desktop as a sticky, each in its own colour, kept on top or hidden. Position and size are remembered.',
+          'Create sticky from selection turns selected text into a new note, linked back to the original, and pins it.'
         ]
       },
       {
-        title: 'Backup and export',
-        description: 'Settings → Data shows the database path and provides separate backup and export actions.',
+        title: 'Safe writes and search',
+        description: 'The Rust core writes every file atomically and never overwrites edits it has not seen.',
         capabilities: [
-          'Backup uses VACUUM INTO to create a consistent SQLite copy while the app runs.',
-          'Export writes Markdown notes and document tabs, JSON and CSV tasks, plus canonical data.json and a versioned manifest.',
-          'Export creates a new folder without overwriting files and skips Trash. Exports are not a database restore mechanism.'
+          'Each write carries the hash of the content it was based on. If the file changed in the meantime, the write is refused as a conflict.',
+          'Deleted notes and folders move to the vault’s Trash and can be restored. Piw never deletes anything outside it on its own.',
+          'Search every note with highlighted matches, from a rebuildable SQLite FTS5 index kept outside the vault.'
         ]
       },
       {
-        title: 'Privacy and window boundaries',
-        description: 'No account, cloud, telemetry, or network access is required or built into the app.',
+        title: 'Privacy and Piw 0.1',
+        description: 'No account, cloud, telemetry, or network requests. Back up or sync the vault like any folder.',
         capabilities: [
-          'Each native window has scoped capabilities. Sticky windows can access commands for their own item only.',
-          'The Rust layer validates export paths and opens native file dialogs; pasted rich content is rebuilt from the editor schema.',
-          'Notes use soft deletion with Trash and undo. The SQLite database is not encrypted at rest.'
+          'Each native window has scoped capabilities; a sticky window can reach only its own note or view. Vault paths are validated in Rust.',
+          'Notes, documents, sections, and tasks from a Piw 0.1 database are imported into the vault on first start. The old database is left untouched.',
+          'The vault is plain text and not encrypted. Device or full-disk encryption protects data at rest.'
         ]
       }
     ],
     runtime: [
-      ['Application', 'Tauri 2, React, TypeScript, and Rust; local SQLite with FTS5.'],
+      ['Application', 'Tauri 2, React, TypeScript, and Rust; CodeMirror for the live Markdown editor.'],
       [
         'Data location',
-        'piw.sqlite3 in the OS app-data directory; inspect the path in Settings → Data. PIW_DATA_DIR can select another directory.'
+        'Notes live in the vault (~/Piw by default). Settings, sticky positions, and the search index live in the OS app-data directory; Settings → Data shows both.'
       ],
       [
         'Window model',
-        'Main workspace, Quick Capture popup, and separate sticky windows, with changes synchronized locally.'
+        'Main window, Quick Capture popup, and separate sticky windows, all reading and writing the same vault.'
       ]
     ],
     shortcuts: [
       ['Ctrl + Shift + Space / ⌘ + Shift + Space', 'Open Quick Capture (configurable)'],
       ['Ctrl / ⌘ + Enter', 'Save the captured note or task'],
-      ['Ctrl / ⌘ + K', 'Search notes, documents, and tasks'],
-      ['Ctrl / ⌘ + T', 'Convert a document line into a task']
+      ['Ctrl / ⌘ + K', 'Search every note'],
+      ['Ctrl / ⌘ + N', 'Create a note'],
+      ['Ctrl / ⌘ + D', 'Set a task’s due date'],
+      ['Ctrl / ⌘ + Shift + P', 'Pin the note to your desktop'],
+      ['Ctrl / ⌘ + Shift + S', 'Create a sticky from the selection']
     ],
     limitations: [
       'Pre-release. Verified daily on Linux with KDE Plasma; Windows and macOS build in CI but have not been tested by hand. GNOME and X11 are untested.',
       'On Wayland, Piw defaults to XWayland for sticky positioning and always-on-top behavior. Native Wayland does not provide those sticky features.',
-      'There is no in-app restore yet. Restoring a SQLite backup requires quitting Piw and replacing the database as described in the repository documentation.',
-      'The database is not encrypted. Device or full-disk encryption provides protection for data at rest.'
+      'A note renamed outside Piw loses its sticky, because the file watcher sees a delete and a create.',
+      'Published builds are not signed. macOS Gatekeeper and Windows SmartScreen ask for approval on first open.'
     ]
   }
 }

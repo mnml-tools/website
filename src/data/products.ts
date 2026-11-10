@@ -56,18 +56,24 @@ export const products = [
     color: '#efc794',
     headline: 'Small thoughts.\nRoom to grow.',
     description:
-      'Catch a thought before it disappears. Turn it into a note, a task, or something bigger. Everything stays on your computer.',
+      'Catch a thought before it disappears. Keep it as plain Markdown, with its tasks close by. Everything stays in a folder on your computer.',
     short: 'A home for the things on your mind.',
     features: [
-      ['Catch it in the moment.', 'Open Quick Capture from another app and save a note or task in seconds.'],
       [
-        'Let your ideas grow.',
-        'Start with a Markdown-friendly note, then grow it into a document with rich text, code blocks, and checklists.'
+        'Catch it in the moment.',
+        'Open Quick Capture from another app and drop a note or task into your Inbox in seconds.'
       ],
-      ['Keep the next step close.', 'Plan tasks with subtasks and due dates, or pin a sticky to your desktop.'],
       [
-        'Yours, locally.',
-        'Notes, documents, and tasks live in a local SQLite file. No account, cloud, or telemetry. Export Markdown, JSON, and CSV.'
+        'Plain Markdown. Your files.',
+        'Notes are .md files in a folder you choose, readable by any editor. Link, tag, and organise them in folders.'
+      ],
+      [
+        'Tasks where they belong.',
+        'A task is a checkbox line in any note. Give it a due date with @tomorrow, then see Today and Upcoming across every note.'
+      ],
+      [
+        'Keep the next step close.',
+        'Pin a note or a task list to your desktop as a sticky, in its own colour. No account, cloud, or telemetry.'
       ]
     ]
   }
