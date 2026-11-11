@@ -25,8 +25,8 @@ export function ProductCard({ product, index }: { product: Product; index: numbe
           src={`/images/${product.slug}-light.png`}
           alt={`${product.name} desktop workspace`}
           loading="lazy"
-          width="1440"
-          height="900"
+          width={product.slug === 'bud' ? 2828 : 1440}
+          height={product.slug === 'bud' ? 2044 : 900}
         />
       </div>
     </a>
